@@ -10,7 +10,7 @@ const geocoder = NodeGeocoder({
 
 
 const server = new Hapi.Server();
-server.connection({ port: 3000, host: 'localhost' });
+server.connection({ port: process.env.PORT || 3000 });
 const postGeoloc = (request, reply) => {
   reply('❤️');
   console.log("Device %s\tlocated at\t%s°\t%s°", request.payload.device, request.payload.lat, request.payload.lng)
