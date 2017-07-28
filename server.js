@@ -13,7 +13,7 @@ const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 3000 });
 const postGeoloc = (request, reply) => {
   reply('❤️');
-  console.log("Device %s\tlocated at\t%s°\t%s°", request.payload.device, request.payload.lat, request.payload.lng)
+  console.log("Device %s\tlocated at\t%s°\t%s° within a %s meters radiius", request.payload.device, request.payload.lat, request.payload.lng, request.payload.radius)
   geocoder.reverse({lat:request.payload.lat, lon:request.payload.lng})
   .then(function(response) {
     if (response && response.length){
@@ -37,7 +37,8 @@ const geolocConfig = {
         device: Joi.string().hex().required(),
         time: Joi.number().required(),
         lat: Joi.number().required(),
-        lng: Joi.number().required()
+        lng: Joi.number().required(),
+        radius: Joi.number().required()
       }
   }
 };
