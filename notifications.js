@@ -14,14 +14,16 @@ const sendPositionMsg = (payload, locations) => {
     var position = locations[0];
     var msg = `[Sigfox geoloc - device ${payload.device}]\n
     Last message sent from in ${position.city}, ${position.state})\n\n
-    Within ${payload.radius} meters of ${position.formattedAddress} (${payload.lat}° ${payload.lng}°)`
-    console.log("about to send SMS", msg);
-    return sendSMS(msg);
+    Within ${payload.radius} meters of ${position.formattedAddress} (${payload.lat}° ${payload.lng}°)`;
+
   }
   else{
     console.warn("⚠️  No geocoding response");
-    return sendErrorMsg("⚠️ Unable to get a location for this message");
+    var msg = `[Sigfox geoloc - device ${payload.device}]\n
+    Last message sent within ${payload.radius} meters of ${payload.lat}° ${payload.lng}°`;
   }
+  console.log("about to send SMS", msg);
+  return sendSMS(msg);
 };
 
 const sendErrorMsg = (payload, err) => {

@@ -16,7 +16,7 @@ const postGeoloc = (request, reply) => {
   console.log("Device %s\tlocated at\t%s°\t%s° within a %s meters radius", request.payload.device, request.payload.lat, request.payload.lng, request.payload.radius)
   geocoder.reverse({lat:request.payload.lat, lon:request.payload.lng})
   .then(response => notifications.sendPosition(request.payload, response))
-  .catch(err => notifications.sendError(request.payload, err));
+  .catch(err => notifications.sendPosition(request.payload, null));
 
 }
 const geolocConfig = {
