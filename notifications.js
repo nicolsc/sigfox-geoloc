@@ -42,8 +42,8 @@ const sendSMS = txt => {
       to: process.env.PHONE,  // Text this number
       from: process.env.TWILIO_FROM // From a valid Twilio number
   })
-  .then((message) => console.log("Twilio OK",message.sid);)
-  .catch(err => console.log("Twilio err", err););
+  .then((message) => console.log("Twilio OK",message.sid))
+  .catch(err => console.log("Twilio err", err));
 };
 
 module.exports  ={
