@@ -7,27 +7,16 @@ const NodeGeocoder = require('node-geocoder');
 const geocoder = NodeGeocoder({
   provider:'openstreetmap'
 });
-
+  const notifications = require('./notifications.js');
 
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 3000 });
 const postGeoloc = (request, reply) => {
   reply('❤️');
-  console.log("Device %s\tlocated at\t%s°\t%s° within a %s meters radiius", request.payload.device, request.payload.lat, request.payload.lng, request.payload.radius)
+  console.log("Device %s\tlocated at\t%s°\t%s° within a %s meters radius", request.payload.device, request.payload.lat, request.payload.lng, request.payload.radius)
   geocoder.reverse({lat:request.payload.lat, lon:request.payload.lng})
-  .then(function(response) {
-    if (response && response.length){
-      console.log(response[0]);
-    }
-    else{
-      console.warn("No geocoding response");
-    }
-
-  })
-  .catch(function(err) {
-
-    console.log(err);
-  });
+  .then(response => notifications.sendPosition(request.payload, response))
+  .catch(err => notifications.sendError(request.payload, err));
 
 }
 const geolocConfig = {

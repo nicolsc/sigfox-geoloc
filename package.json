@@ -1,7 +1,7 @@
 {
-  "name": "sensit-geoloc",
-  "version": "1.0.0",
-  "description": "",
+  "name": "sigfox-geoloc-demo",
+  "version": "0.1.0",
+  "description": "Receive geolocation information from a Sigfox device, reverse geocode its position & sends a notification with the latest position of the device",
   "main": "server.js",
   "dependencies": {
     "good": "^7.2.0",
@@ -9,12 +9,13 @@
     "good-squeeze": "^5.0.2",
     "hapi": "^16.5.0",
     "joi": "^10.6.0",
-    "node-geocoder": "^3.18.0"
+    "node-geocoder": "^3.18.0",
+    "twilio": "^3.6.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "nicolsc <nicolas.lesconnec@gmail.com>",
   "license": "ISC"
 }
