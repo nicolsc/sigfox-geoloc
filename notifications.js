@@ -14,7 +14,7 @@ const sendPositionMsg = (payload, locations) => {
     var position = locations[0];
     var msg = `[Sigfox geoloc - device ${payload.device}]\n
     Last message sent from in ${position.city}, ${position.state})\n\n
-    Within ${payload.radius} meters of ${position.formattedAddress} (${payload.lat}° ${payload.lng}°)`;
+    Within ${payload.radius} meters of ${position.formattedAddress || position.streetName || position.zipcode || position.city} (${payload.lat}° ${payload.lng}°)`;
 
   }
   else{
